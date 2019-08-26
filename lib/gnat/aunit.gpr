@@ -15,16 +15,26 @@ project AUnit is
       "../../include/aunit/framework/" & AUnit_Shared.Memory,
       "../../include/aunit/framework/" & AUnit_Shared.FileIO);
 
+   for Library_Name use "aunit";
+
+   case AUnit_Shared.Soversion is
+      when "" =>
+         for Library_Kind use "static";
+      when others =>
+         for Library_Kind use "dynamic";
+         for Library_Version use "lib" & project'Library_name & ".so."
+           & AUnit_Shared.Soversion;
+   end case;
+
    for Library_Dir use "../aunit/"
      & AUnit_Shared.Target & "-"
-     & AUnit_Shared.Runtime;
+     & AUnit_Shared.Runtime & "-"
+     & project'Library_Kind;
 
    for Object_Dir use "../aunit-obj/"
      & AUnit_Shared.Target & "-"
-     & AUnit_Shared.Runtime;
-
-   for Library_Name use "aunit";
-   for Library_Kind use "static";
+     & AUnit_Shared.Runtime & "-"
+     & project'Library_Kind;
 
    --------------
    -- Compiler --

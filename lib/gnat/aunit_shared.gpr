@@ -14,6 +14,10 @@ project AUnit_Shared is
 
    Runtime : Runtime_Type := external ("AUNIT_RUNTIME", "full");
 
+   --  The default is empty, and requires a static build.
+   --  A non-empty soversion requires a shared library.
+   Soversion := External ("aunit_SOVERSION", "");
+
    for Source_Dirs use ();
 
    type Exception_Type is ("fullexception", "certexception", "zfpexception");
