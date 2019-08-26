@@ -3,9 +3,6 @@ with "aunit_shared";
 
 project AUnit is
 
-   type Compilation_Mode_Type is ("Devel", "Install");
-   Mode : Compilation_Mode_Type := external ("AUNIT_BUILD_MODE", "Install");
-
    for Source_Dirs use
      ("../../include/aunit/framework",
       "../../include/aunit/containers",
@@ -43,7 +40,7 @@ project AUnit is
    --------------
 
    package Compiler is
-      case Mode is
+      case AUnit_Shared.Mode is
          when "Devel" =>
             for Default_Switches ("ada") use
               ("-g", "-gnatQ", "-O1", "-gnatf", "-gnato",

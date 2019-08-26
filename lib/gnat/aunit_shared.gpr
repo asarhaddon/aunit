@@ -1,5 +1,8 @@
 project AUnit_Shared is
 
+   type Compilation_Mode_Type is ("Devel", "Install");
+   Mode : Compilation_Mode_Type := external ("AUNIT_BUILD_MODE", "Install");
+
    Target := external ("AUNIT_PLATFORM", "native");
 
    type Runtime_Type is
