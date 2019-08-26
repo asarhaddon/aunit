@@ -18,6 +18,9 @@ project AUnit_Shared is
    --  A non-empty soversion requires a shared library.
    Soversion := External ("aunit_SOVERSION", "");
 
+   Adaflags  := External_As_List ("ADAFLAGS", " ");
+   Ldflags   := External_As_List ("LDFLAGS",  " ");
+
    for Source_Dirs use ();
 
    type Exception_Type is ("fullexception", "certexception", "zfpexception");

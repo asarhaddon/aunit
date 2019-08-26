@@ -24,6 +24,8 @@ project AUnit is
          for Library_Kind use "dynamic";
          for Library_Version use "lib" & project'Library_name & ".so."
            & AUnit_Shared.Soversion;
+         --  Put options like --as-needed before the libraries.
+         for Leading_Library_Options use AUnit_Shared.Ldflags;
    end case;
 
    for Library_Dir use "../aunit/"
@@ -51,6 +53,9 @@ project AUnit is
             for Default_Switches ("ada") use
               ("-O2", "-gnatp", "-gnatn", "-gnatwa.X");
       end case;
+      --  Allow user flags to override default flags.
+      for Default_Switches ("ada") use Compiler'Default_Switches ("ada")
+        & AUnit_Shared.Adaflags;
 
       for Switches ("aunit.adb") use
         Compiler'Default_Switches ("ada") & ("-fno-strict-aliasing");
